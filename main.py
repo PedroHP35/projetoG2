@@ -39,11 +39,16 @@ def jogar(nome):
     posicaoXMissel = 400
     posicaoYMissel = -240
     velocidadeMissel = 1
+    posicaoXMisselb = 300
+    posicaoYMisselb = -240
+    velocidadeMisselb = 1
     pontos = 0
     larguraPersona = 150
     alturaPersona = 214
     larguaMissel  = 60
     alturaMissel  = 120
+    larguaMisselb  = 60
+    alturaMisselb  = 120
     dificuldade  = 30
 
     while True:
@@ -84,11 +89,20 @@ def jogar(nome):
             pontos = pontos + 1
             velocidadeMissel = velocidadeMissel + 1
             posicaoXMissel = random.randint(0,800)
+            tela.blit( skol, (posicaoXMissel, posicaoYMissel) ) 
+            posicaoYMisselb = posicaoYMisselb + velocidadeMisselb
+        
+        posicaoYMisselb = posicaoYMisselb + velocidadeMisselb
+        if posicaoYMisselb > 600:
+            posicaoYMisselb = -240
+            pontos = pontos + 1
+            velocidadeMisselb = velocidadeMisselb + 1
+            posicaoXMissel = random.randint(0,800)
             #pygame.mixer.Sound.play(missileSound)
             
             
         tela.blit( skol, (posicaoXMissel, posicaoYMissel) )  
-        
+        tela.blit( brahma, (posicaoXMisselb, posicaoYMisselb) )
         texto = fonte.render(nome+"- Pontos: "+str(pontos), True, branco)
         tela.blit(texto, (10,10))
         
@@ -96,12 +110,15 @@ def jogar(nome):
         pixelsPersonaY = list(range(posicaoYPersona, posicaoYPersona+alturaPersona))
         pixelsMisselX = list(range(posicaoXMissel, posicaoXMissel + larguaMissel))
         pixelsMisselY = list(range(posicaoYMissel, posicaoYMissel + alturaMissel))
-        
+        pixelsMisselXb = list(range(posicaoXMisselb, posicaoXMisselb + larguaMisselb))
+        pixelsMisselYb = list(range(posicaoYMisselb, posicaoYMisselb + alturaMisselb))
         #print( len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )   )
         if  len( list( set(pixelsMisselY).intersection(set(pixelsPersonaY))) ) > dificuldade:
             if len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
                 dead(nome, pontos)
-        
+        if  len( list( set(pixelsMisselYb).intersection(set(pixelsPersonaY))) ) > dificuldade:
+            if len( list( set(pixelsMisselXb).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
+                dead(nome, pontos)
     
         
         pygame.display.update()
