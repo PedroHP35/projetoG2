@@ -42,9 +42,9 @@ def jogar(nome):
     pontos = 0
     larguraPersona = 250
     alturaPersona = 127
-    larguaMissel  = 50
-    alturaMissel  = 250
-    dificuldade  = 40
+    larguaMissel  = 60
+    alturaMissel  = 120
+    dificuldade  = 30
 
     while True:
         for evento in pygame.event.get():
