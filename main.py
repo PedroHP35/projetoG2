@@ -40,8 +40,8 @@ def jogar(nome):
     posicaoYMissel = -240
     velocidadeMissel = 1
     pontos = 0
-    larguraPersona = 250
-    alturaPersona = 127
+    larguraPersona = 150
+    alturaPersona = 214
     larguaMissel  = 60
     alturaMissel  = 120
     dificuldade  = 30
