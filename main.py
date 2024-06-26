@@ -13,7 +13,7 @@ fundoStart = pygame.image.load("recursos/fundoStart.png")
 fundoDead = pygame.image.load("recursos/fundoDead.png")
 
 skol = pygame.image.load("recursos/inimigo.png")
-#brahma = pygame.image.load("recursos/inimigo2.png")
+brahma = pygame.image.load("recursos/inimigo2.png")
 tamanho = (800,600)
 tela = pygame.display.set_mode( tamanho ) 
 pygame.display.set_caption("Show de Bola - The Game")
@@ -44,7 +44,7 @@ def jogar(nome):
     alturaPersona = 127
     larguaMissel  = 50
     alturaMissel  = 250
-    dificuldade  = 30
+    dificuldade  = 40
 
     while True:
         for evento in pygame.event.get():
@@ -88,8 +88,6 @@ def jogar(nome):
             
             
         tela.blit( skol, (posicaoXMissel, posicaoYMissel) )  
-            
-        tela.blit( brahma, (posicaoXMissel, posicaoYMissel) )
         
         texto = fonte.render(nome+"- Pontos: "+str(pontos), True, branco)
         tela.blit(texto, (10,10))
