@@ -13,6 +13,7 @@ fundoStart = pygame.image.load("recursos/fundoStart.png")
 fundoDead = pygame.image.load("recursos/fundoDead.png")
 
 skol = pygame.image.load("recursos/inimigo.png")
+#brahma = pygame.image.load("recursos/inimigo2.png")
 tamanho = (800,600)
 tela = pygame.display.set_mode( tamanho ) 
 pygame.display.set_caption("Show de Bola - The Game")
@@ -43,7 +44,7 @@ def jogar(nome):
     alturaPersona = 127
     larguaMissel  = 50
     alturaMissel  = 250
-    dificuldade  = 20
+    dificuldade  = 30
 
     while True:
         for evento in pygame.event.get():
@@ -57,14 +58,6 @@ def jogar(nome):
                 movimentoXPersona = 0
             elif evento.type == pygame.KEYUP and evento.key == pygame.K_LEFT:
                 movimentoXPersona = 0
-            elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_UP:
-                movimentoYPersona = -10
-            elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_DOWN:
-                movimentoYPersona = 10
-            elif evento.type == pygame.KEYUP and evento.key == pygame.K_UP:
-                movimentoYPersona = 0
-            elif evento.type == pygame.KEYUP and evento.key == pygame.K_DOWN:
-                movimentoYPersona = 0
                 
         posicaoXPersona = posicaoXPersona + movimentoXPersona            
         posicaoYPersona = posicaoYPersona + movimentoYPersona            
@@ -94,7 +87,9 @@ def jogar(nome):
             #pygame.mixer.Sound.play(missileSound)
             
             
-        tela.blit( skol, (posicaoXMissel, posicaoYMissel) )
+        tela.blit( skol, (posicaoXMissel, posicaoYMissel) )  
+            
+        tela.blit( brahma, (posicaoXMissel, posicaoYMissel) )
         
         texto = fonte.render(nome+"- Pontos: "+str(pontos), True, branco)
         tela.blit(texto, (10,10))
