@@ -12,6 +12,7 @@ fundo = pygame.image.load("recursos/fundo.png")
 fundoStart = pygame.image.load("recursos/fundoStart.png")
 fundoDead = pygame.image.load("recursos/fundoDead.png")
 
+
 skol = pygame.image.load("recursos/inimigo.png")
 brahma = pygame.image.load("recursos/inimigo2.png")
 tamanho = (800,600)
@@ -29,6 +30,10 @@ branco = (255,255,255)
 preto = (0, 0 ,0 )
 amarelo = (255, 255, 0)
 
+
+
+praca = pygame.image.load("recursos/praca.jpg")
+praca = pygame.transform.scale(praca, (100, 75))
 def jogar(nome):
     #pygame.mixer.Sound.play(missileSound)
     #pygame.mixer.music.play(-1)
@@ -50,7 +55,15 @@ def jogar(nome):
     larguaMisselb  = 60
     alturaMisselb  = 120
     dificuldade  = 30
+    aumentando = True
+    radius = 20
 
+    posicaoXpraca = random.randint(0, tamanho[0] - 50)
+    posicaoYpraca = random.randint(0, tamanho[0] - 50)
+    movimentoXpraca= random.choice([-1,1])
+    movimentoYpraca= random.choice([-1,1])
+    
+    
     while True:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -81,8 +94,16 @@ def jogar(nome):
         tela.fill(branco)
         tela.blit(fundo, (0,0) )
         #pygame.draw.circle(tela, preto, (posicaoXPersona,posicaoYPersona), 40, 0 )
-        tela.blit( personagemPrincipal, (posicaoXPersona, posicaoYPersona) )
-        
+        tela.blit( personagemPrincipal, (posicaoXPersona, posicaoYPersona))
+        pygame.draw.circle(tela, amarelo, (750, 50), radius)
+        if aumentando:
+            radius += 0.15
+            if radius >=40:
+                aumentando = False
+            else:
+                radius -=0.15
+                if radius <=10:
+                    aumentando = True
         posicaoYMissel = posicaoYMissel + velocidadeMissel
         if posicaoYMissel > 600:
             posicaoYMissel = -240
@@ -119,7 +140,16 @@ def jogar(nome):
         if  len( list( set(pixelsMisselYb).intersection(set(pixelsPersonaY))) ) > dificuldade:
             if len( list( set(pixelsMisselXb).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
                 dead(nome, pontos)
-    
+
+                posicaoYpraca += movimentoYpraca
+                if posicaoXpraca <= 0 or posicaoXpraca >= tamanho[0] - 50:
+                    movimentoXpraca = - movimentoXpraca
+                
+                if posicaoYpraca <= 0 or posicaoYpraca >= tamanho[1] - 50:
+                    movimentoYpraca = - movimentoYpraca
+
+                tela.blit(praca, (posicaoXpraca, posicaoYpraca))
+                
         
         pygame.display.update()
         relogio.tick(60)
